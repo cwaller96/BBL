@@ -1,0 +1,20 @@
+RewriteEngine On
+RewriteBase /chasewaller-weekendprojects/broadbandlabel-prototype/src/
+
+# Enable rewrite logging (uncomment for debugging)
+# RewriteLog "/var/log/apache2/rewrite.log"
+# RewriteLogLevel 9
+
+# Allow direct access to specific files
+RewriteRule ^(access_denied\.html|request_access\.php|admin_review\.php)$ - [L]
+
+# Redirect the base URL to access_denied.html
+RewriteRule ^$ access_denied.html [L]
+
+# Redirect all other requests to access_denied.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . access_denied.html [L]
+
+# Prevent directory listing
+Options -Indexes
